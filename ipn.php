@@ -1,7 +1,9 @@
 <?php
     $payment = "Sin data";
     require __DIR__ .  '/vendor/autoload.php';
-    MercadoPago\SDK::setAccessToken('APP_USR-2926550097213535-092911-5eded40868803c83f12e9eef1afa99fa-1160956296');
+    //MercadoPago\SDK::setAccessToken('APP_USR-2926550097213535-092911-5eded40868803c83f12e9eef1afa99fa-1160956296');
+    MercadoPago\SDK::setAccessToken('TEST-2926550097213535-092911-9f95049df86420b3055add7ae6e0e56e-1160956296');
+
     switch($_POST["type"]) {
         case "payment":
             $payment = MercadoPago\Payment::find_by_id($_POST["data"]["id"]);
