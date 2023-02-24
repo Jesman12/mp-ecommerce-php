@@ -1,4 +1,6 @@
 <?php
+    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+
     // SDK de Mercado Pago
     require __DIR__ .  '/vendor/autoload.php';
     // Agrega credenciales
@@ -10,7 +12,7 @@
 
     // Crea un ítem en la preferencia
     $item = new MercadoPago\Item();
-    $item->id = 1234;
+    $item->id = "1234";
     $item->title = $_REQUEST['title'];
     $item->quantity = $_REQUEST['unit'];
     $item->currency_id = "MXN";
@@ -19,17 +21,18 @@
     $item->description = "Dispositivo móvil de Tienda e-commerce";
     $preference->items = array($item);
 
+    
     $preference->payment_methods = array(
         "excluded_payment_methods" => array(
-          array("id" => "visa")
+            array("id" => "visa")
         ),
         "installments" => 6
-      );
+    );
 
     $preference->back_urls = array(
-        "success" => "/success.php",
-        "failure" => "/failure.php",
-        "pending" => "/pending.php"
+        "success" => $actual_link."/success.php",
+        "failure" => $actual_link."/failure.php",
+        "pending" => $actual_link."/pending.php"
     );
     $preference->auto_return = "approved";
 
@@ -43,7 +46,7 @@
     $payer->phone = array("area_code" => 52, "number" => "2214466858");
     $payer->address = array(
         "street_name" => "Avenida Siempre Viva",
-        "street_number" => 123,
+        "street_number" => "123",
         "zip_code" => "72140"
     );
 
@@ -51,7 +54,9 @@
 
     $preference->save();
 
-    echo $preference->init_point;
+    //echo $preference->init_point;
+    //echo $preference->sandbox_init_point;
+    echo $actual_link."/success.php";
 ?>
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
