@@ -1,0 +1,1 @@
+[ PAYMENT_ID],app roved,[EXTERNAL_REFERENCE],cre dit_card,[PREFER ENCE_ID],[ SITE_ID],aggregator,null
